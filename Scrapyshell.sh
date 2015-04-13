@@ -46,6 +46,9 @@ elif [ $1 == "USA300" ]; then
 elif [ $1 == "USA400" ]; then
      file="USA_SandP400.txt"
      outputpath="/Volumes/Mydata/SharesProject/FTCompanyData/Output/USA"     
+elif [ $1 == "USA500" ]; then
+     file="USA_SandP500.txt"
+     outputpath="/Volumes/Mydata/SharesProject/FTCompanyData/Output/USA"     
 elif [ $1 == "USAADR" ]; then
      file="USA_SandPADR.txt"
      outputpath="/Volumes/Mydata/SharesProject/FTCompanyData/Output/USA"     
@@ -132,13 +135,18 @@ if [ $1 == "USAADR" ]; then
 		
    echo "Removing logs files older than 21 days" >> $logpath/"$filename"_"$START_TIME".log
    find $logpath/*.log -mtime +21 -exec rm {} \;
+   
+   python /Volumes/MyData/SharesProject/FTCompanyData/OutputCleaner.py USA
+   	
 
-elif [ $1 == "USA100" ] || [ $1 == "USA200" ] || [ $1 == "USA300" ] || [ $1 == "USA400" ]; then
+elif [ $1 == "USA100" ] || [ $1 == "USA200" ] || [ $1 == "USA300" ] || [ $1 == "USA400" ] || [ $1 == "USA500" ]; then
    echo "No Scala File Processing for these files " >> $logpath/"$filename"_"$START_TIME".log	
 
 else 
    echo "Scala File Processing " >> $logpath/"$filename"_"$START_TIME".log
    sh /Volumes/MyData/SharesProject/DCFTCalc/Maincaller.sh $1 $TODAY	
+
+   python /Volumes/MyData/SharesProject/FTCompanyData/OutputCleaner.py $1	
 
 fi
 echo "Exiting Scrapy Shell" >> $logpath/"$filename"_"$START_TIME".log	

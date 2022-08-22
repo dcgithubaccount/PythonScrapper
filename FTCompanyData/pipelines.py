@@ -108,7 +108,7 @@ class FtcompanydataPipeline(object):
          return pipeline
 
     def spider_opened(self, spider):
-        file = open('%s_.csv' % spider.name, 'w+b')
+        file = open(f'{spider.name}_.csv', 'w+b')
         self.files[spider] = file
         self.exporter = CsvItemExporter(file)
         self.exporter.start_exporting()

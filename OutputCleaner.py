@@ -14,12 +14,15 @@ countrypath = os.path.join(path,country)
 now = time.time()
 
 for f in os.listdir(countrypath):
-	if os.stat(os.path.join(countrypath,f)).st_mtime < now - 15*86400 :
-		if os.path.isfile(os.path.join(countrypath,f)):
-			with open(os.path.join(apath,filename),'a') as f1:
-				for line in open(os.path.join(countrypath,f)):
-					f1.write(line)
-			os.remove(os.path.join(countrypath,f))
+	if os.stat(
+		os.path.join(countrypath, f)
+	).st_mtime < now - 15 * 86400 and os.path.isfile(
+		os.path.join(countrypath, f)
+	):
+		with open(os.path.join(apath,filename),'a') as f1:
+			for line in open(os.path.join(countrypath,f)):
+				f1.write(line)
+		os.remove(os.path.join(countrypath,f))
 
 
 			 

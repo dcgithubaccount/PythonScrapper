@@ -15,7 +15,9 @@ class FTCompanyDataSpider(Spider):
     
     def __init__(self, ric=None, *args, **kwargs):
         super(FTCompanyDataSpider, self).__init__(*args, **kwargs)
-        self.start_urls = ['http://markets.ft.com/research/Markets/Tearsheets/Summary?s=%s' % ric] 
+        self.start_urls = [
+            f'http://markets.ft.com/research/Markets/Tearsheets/Summary?s={ric}'
+        ] 
     #start_urls = [
     #     "http://markets.ft.com/research/Markets/Tearsheets/Summary?s=AAL:LSE"
     #]
